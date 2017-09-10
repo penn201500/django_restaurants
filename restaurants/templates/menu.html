@@ -1,0 +1,33 @@
+<!--doctype html-->
+<html>
+    <head>
+        <title>Menu</title>
+        <meta  charset = 'utf-8'>
+    </head>
+    <body>
+        {% for  r  in  restaurants %} 
+            <h2> {{r.name}} </h> 
+            {% if  r.food_set.all %} 
+                <p> 本餐厅共有{{ r.food_set.all | length }} 道菜</p> 
+                <table> 
+                    <tr> 
+                        <th> 菜名</th> 
+                        <th> 价格</th> 
+                        <th> 注解</th> 
+                        <th> 辣不辣</th> 
+                    </tr> 
+                {% for  food  in  r.food_set.all %} 
+                    <tr> 
+                        <td>  {{ food.name }}  </td> 
+                        <td>  {{ food.price }}  </td> 
+                        <td>  {{ food.comment }}  </td> 
+                        <td>  {% if  food.is_spicy %}  辣 {% else %}  不辣 {% endif %}  </td> 
+                    </tr> 
+                {% endfor %} 
+                </table> 
+            {% else %} 
+                <p> 本餐厅啥都没卖</p> 
+            {% endif %} 
+        {% endfor %} 
+    </body> 
+</html>
